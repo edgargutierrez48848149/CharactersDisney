@@ -1,6 +1,5 @@
 package com.example.charactersdisney.characters.data.db
 
-import com.example.charactersdisney.characters.data.db.entity.CharacterOfflineEntity
 import com.example.charactersdisney.characters.ui.model.CharacterModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

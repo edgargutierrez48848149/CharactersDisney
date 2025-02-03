@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
@@ -30,14 +29,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -59,7 +57,7 @@ fun MainScreen(characterVm: CharacterVm) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = {CharSearcBarView(characterVm)},
+        topBar = { if (isConnected) CharSearcBarView(characterVm) else TextOfflineView()},
         bottomBar = { CharNavigationBarView(navCortroller) }
     ) { innerPadding ->
         Box(
@@ -70,14 +68,18 @@ fun MainScreen(characterVm: CharacterVm) {
                 characterList = characters,
                 characterVm = characterVm
             )
-            if(!isConnected){
-                Text(
-                    modifier = Modifier.fillMaxWidth().background(Color.Red),
-                    text = "No hay Conexion"
-                )
-            }
         }
     }
+}
+
+@Composable
+fun TextOfflineView(){
+    Text(
+        modifier = Modifier.fillMaxWidth().background(Color.Red).padding(0.dp,25.dp,0.dp,0.dp),
+        text = "No hay Conexion",
+        textAlign = TextAlign.Center,
+        color = Color.White
+    )
 }
 
 @Composable

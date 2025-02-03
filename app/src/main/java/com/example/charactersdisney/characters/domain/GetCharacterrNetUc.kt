@@ -1,7 +1,6 @@
 package com.example.charactersdisney.characters.domain
 
 import androidx.paging.PagingData
-import com.example.charactersdisney.characters.data.db.CharacterDbRepo
 import com.example.charactersdisney.characters.data.network.CharacterNetRepo
 import com.example.charactersdisney.characters.ui.model.CharacterModel
 import kotlinx.coroutines.flow.Flow
