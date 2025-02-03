@@ -12,13 +12,13 @@ import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
 
 class CharacterConnectivityObserver @Inject constructor(
-    context:Context
-):ConnectionObserver{
+    context: Context
+) : ConnectionObserver {
 
     private val connectivityManager = context.getSystemService<ConnectivityManager>()
 
     override val isConnected: Flow<Boolean>
-        get() = callbackFlow { 
+        get() = callbackFlow {
             val callback = object : NetworkCallback() {
                 override fun onCapabilitiesChanged(
                     network: Network,
@@ -49,12 +49,8 @@ class CharacterConnectivityObserver @Inject constructor(
 
             connectivityManager?.registerDefaultNetworkCallback(callback)
 
-            awaitClose{
+            awaitClose {
                 connectivityManager?.unregisterNetworkCallback(callback)
             }
         }
-
-
-
-
 }
